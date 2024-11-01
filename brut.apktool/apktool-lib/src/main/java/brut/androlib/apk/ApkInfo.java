@@ -48,6 +48,7 @@ public class ApkInfo implements YamlSerializable {
     public Map<String, String> sdkInfo = new LinkedHashMap<>();
     public PackageInfo packageInfo = new PackageInfo();
     public VersionInfo versionInfo = new VersionInfo();
+    public ResourceInfo resource = new ResourceInfo();
     public Map<String, Boolean> featureFlags = new LinkedHashMap<>();
     public boolean sharedLibrary;
     public boolean sparseResources;
@@ -254,6 +255,11 @@ public class ApkInfo implements YamlSerializable {
                 reader.readObject(versionInfo);
                 break;
             }
+            case "resourceInfo": {
+                resourceInfo = new ResourceInfo();
+                reader.readObject(resourceInfo);
+                break;
+            }
             case "featureFlags": {
                 featureFlags.clear();
                 reader.readBoolMap(featureFlags);
@@ -288,6 +294,7 @@ public class ApkInfo implements YamlSerializable {
         writer.writeMap("sdkInfo", sdkInfo);
         writer.writeObject("packageInfo", packageInfo);
         writer.writeObject("versionInfo", versionInfo);
+        writer.writeObject("resourceInfo", resourceInfo);
         if (!featureFlags.isEmpty()) {
             writer.writeMap("featureFlags", featureFlags);
         }
