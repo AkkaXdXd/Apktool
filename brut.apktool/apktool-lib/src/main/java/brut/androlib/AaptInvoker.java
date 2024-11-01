@@ -170,6 +170,11 @@ public class AaptInvoker {
             cmd.add(mApkInfo.versionInfo.versionName);
         }
 
+        if (mApkInfo.resource.renameResourcesPackageName != null) {
+            cmd.add("--rename-resources-package");
+            cmd.add(mApkInfo.resource.renameResourcesPackageName);
+        }
+
         // Disable automatic changes
         cmd.add("--no-auto-version");
         cmd.add("--no-version-vectors");
